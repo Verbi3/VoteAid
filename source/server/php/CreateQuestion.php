@@ -18,9 +18,12 @@ if (!$dbs) {
     exit();
 }
 
+$ElectionId = mysqli_real_escape_string($dbc, $_GET['ElectionId']);
 $Question = mysqli_real_escape_string($dbc, $_GET['Question']);
+$UserId = mysqli_real_escape_string($dbc, $_GET['UserId']);
+$ForCandidate = mysqli_real_escape_string($dbc, $_GET['ForCandidate']);
 
-$query = "INSERT INTO $table (Question) VALUES ('$Question')";
+$query = "INSERT INTO $table (ElectionId, Question, UserId, CreatedAt, ForCandidate) VALUES ('$ElectionId', '$Question', '$UserId', NOW(), '$ForCandidate' )";
 
 $result = mysqli_query($dbc, $query) or trigger_error("Query MySQL Error: " . mysqli_error($dbc)); 
 
